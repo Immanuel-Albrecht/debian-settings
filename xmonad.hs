@@ -90,5 +90,5 @@ main = do
       , ((mod4Mask .|. shiftMask .|. controlMask , xK_semicolon), sendToScreen 0 )
       , ((mod4Mask .|. shiftMask , xK_comma), viewScreen 1 )
       , ((mod4Mask .|. shiftMask .|. controlMask , xK_comma), sendToScreen 1 )
-       
+      , ((mod4Mask .|. shiftMask, xK_m), windows W.swapMaster)
       ]

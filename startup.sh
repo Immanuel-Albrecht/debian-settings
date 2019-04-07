@@ -4,6 +4,10 @@ rm $HOME/.startup-sh
 
 touch $HOME/.startup-sh
 
+# set gnome hiDPI mode
+
+$(dirname $0)/set_hidpi.sh
+
 # Set hiDPI to X
 
 cat - <<EOF | xrdb -merge /dev/stdin

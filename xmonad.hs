@@ -75,6 +75,7 @@ myIconsDir      = "/home/immo/.xmonad/icons/"
 
 
 main = do
+   xmproc <- spawnPipe "/usr/bin/xmobar /home/immo/.xmobarrc"
    xmonad $ gnomeConfig 
       {  modMask = mod4Mask -- use windows key as modifier key
       ,  borderWidth = 4

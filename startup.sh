@@ -20,23 +20,23 @@ Xft.antialias: 1
 Xft.rgba: rgb
 EOF
 
-sleep 3
 if ! [ -z "$(xrandr | grep 'DP-1 disconnected')" ] ; then 
-./notebook-only.sh
+	echo "Notebook only mode..." >> $HOME/.startup-sh
+	$(dirname $0)/notebook-only.sh
 else
-	set -x 
+	echo "Notebook&DP-1 hi-res mode..." >> $HOME/.startup-sh
 
-MYMODE="$(xrandr | grep -A 1 '^DP-1 con' | tail -n 1 | awk '{print $1}')"
-xrandr --output DP-1 --mode "$MYMODE" --primary --pos 0x0
-LCDMODE="$(xrandr | grep -A 1 '^eDP-1 con' | tail -n 1 | awk '{print $1}')"
-xrandr --output eDP-1 --mode "$LCDMODE" --scale "1.4x1.4" --right-of DP-1 --noprimary
-MYMODE="$(xrandr | grep '^DP-1 con' | awk '{print $4}')"
-LCDMODE="$(xrandr | grep '^eDP-1 con' | awk '{print $4}')"
-LCDHEIGHT="$(xrandr | grep '^eDP-1 con' | awk '{print $3}' | tr 'x+' '  ' | awk '{print $2}')"
-MYWIDTH="$(xrandr | grep '^DP-1 con' | awk '{print $3}' | tr 'x+' '  ' | awk '{print $1}')"
-MYHEIGHT="$(xrandr | grep '^DP-1 con' | awk '{print $3}' | tr 'x+' '  ' | awk '{print $2}')"
-LCDPOS="${MYWIDTH}x$(( MYHEIGHT - LCDHEIGHT ))" 
-xrandr --output eDP-1 --pos "$LCDPOS"
+	MYMODE="$(xrandr | grep -A 1 '^DP-1 con' | tail -n 1 | awk '{print $1}')"
+	xrandr --output DP-1 --mode "$MYMODE" --primary --pos 0x0
+	LCDMODE="$(xrandr | grep -A 1 '^eDP-1 con' | tail -n 1 | awk '{print $1}')"
+	xrandr --output eDP-1 --mode "$LCDMODE" --scale "1.4x1.4" --right-of DP-1 --noprimary
+	MYMODE="$(xrandr | grep '^DP-1 con' | awk '{print $4}')"
+	LCDMODE="$(xrandr | grep '^eDP-1 con' | awk '{print $4}')"
+	LCDHEIGHT="$(xrandr | grep '^eDP-1 con' | awk '{print $3}' | tr 'x+' '  ' | awk '{print $2}')"
+	MYWIDTH="$(xrandr | grep '^DP-1 con' | awk '{print $3}' | tr 'x+' '  ' | awk '{print $1}')"
+	MYHEIGHT="$(xrandr | grep '^DP-1 con' | awk '{print $3}' | tr 'x+' '  ' | awk '{print $2}')"
+	LCDPOS="${MYWIDTH}x$(( MYHEIGHT - LCDHEIGHT ))" 
+	xrandr --output eDP-1 --pos "$LCDPOS"
 
 fi
 

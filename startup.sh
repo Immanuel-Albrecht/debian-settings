@@ -22,7 +22,7 @@ EOF
 
 sleep 3
 if ! [ -z "$(xrandr | grep 'DP-1 disconnected')" ] ; then 
-xrandr --output eDP-1 --scale "1.25x1.25" --primary --auto
+./notebook-only.sh
 else
 	set -x 
 
@@ -40,5 +40,6 @@ xrandr --output eDP-1 --pos "$LCDPOS"
 
 fi
 
+feh --bg-scale /usr/share/backgrounds/gnome/Stones.jpg &
 
 echo "done." >> $HOME/.startup-sh

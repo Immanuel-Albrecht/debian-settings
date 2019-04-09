@@ -4,13 +4,19 @@ rm $HOME/.startup-sh
 
 touch $HOME/.startup-sh
 
-# set gnome hiDPI mode
 
-$(dirname $0)/set_hidpi.sh
+if ! [ -z "$(xrandr | grep 'DP-1 disconnected')" ] ; then 
+	echo "Notebook only mode..." >> $HOME/.startup-sh
+	$(dirname $0)/set_lodpi.sh
+	$(dirname $0)/notebook-only.sh
+else
+	# set gnome hiDPI mode
 
-# Set hiDPI to X
+	$(dirname $0)/set_hidpi.sh
 
-cat - <<EOF | xrdb -merge /dev/stdin
+	# Set hiDPI to X
+
+	cat - <<EOF | xrdb -merge /dev/stdin
 Xft.dpi: 140
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
@@ -19,11 +25,6 @@ Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
 EOF
-
-if ! [ -z "$(xrandr | grep 'DP-1 disconnected')" ] ; then 
-	echo "Notebook only mode..." >> $HOME/.startup-sh
-	$(dirname $0)/notebook-only.sh
-else
 	echo "Notebook&DP-1 hi-res mode..." >> $HOME/.startup-sh
 
 	MYMODE="$(xrandr | grep -A 1 '^DP-1 con' | tail -n 1 | awk '{print $1}')"
@@ -41,5 +42,7 @@ else
 fi
 
 feh --bg-scale /usr/share/backgrounds/gnome/Stones.jpg &
+
+xmobar &
 
 echo "done." >> $HOME/.startup-sh

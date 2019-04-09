@@ -12,3 +12,4 @@ Xft.antialias: 1
 Xft.rgba: rgb
 EOF
 
+touch $HOME/.notebook-only-sh

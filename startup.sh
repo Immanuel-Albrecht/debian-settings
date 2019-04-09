@@ -4,6 +4,7 @@ rm $HOME/.startup-sh
 
 touch $HOME/.startup-sh
 
+xsetroot -cursor_name left_ptr
 
 if ! [ -z "$(xrandr | grep 'DP-1 disconnected')" ] ; then 
 	echo "Notebook only mode..." >> $HOME/.startup-sh

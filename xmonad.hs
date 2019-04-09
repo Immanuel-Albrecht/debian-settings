@@ -93,4 +93,5 @@ main = do
       , ((mod4Mask .|. shiftMask, xK_m), windows W.swapMaster)
       , ((mod4Mask .|. shiftMask, xK_q), spawn "kill-gdm-session.sh")
       , ((mod4Mask .|. controlMask, xK_q), spawn "xtrlock")
+      , ((mod4Mask, xK_p), spawn "my-menu.sh")
       ]
